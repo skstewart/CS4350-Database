@@ -16,6 +16,7 @@ public class CustomerView
 
 	/**
 	 * Launch the application.
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args)
@@ -23,7 +24,7 @@ public class CustomerView
 		try
 		{
 			CustomerView window = new CustomerView();
-			
+
 			window.open();
 		} catch (Exception e)
 		{
@@ -58,48 +59,67 @@ public class CustomerView
 		shell.setMinimumSize(new Point(700, 500));
 		shell.setSize(558, 316);
 		shell.setText("Customer View");
-		
+
 		txtTargutDatabaseSystem = new Text(shell, SWT.BORDER | SWT.CENTER);
 		txtTargutDatabaseSystem.setFont(SWTResourceManager.getFont("Segoe UI", 32, SWT.NORMAL));
 		txtTargutDatabaseSystem.setEnabled(false);
 		txtTargutDatabaseSystem.setEditable(false);
 		txtTargutDatabaseSystem.setText("Targut Online System");
 		txtTargutDatabaseSystem.setBounds(73, 34, 546, 77);
-		
+
 		Button btnPlaceAnOrder = new Button(shell, SWT.NONE);
-		btnPlaceAnOrder.addSelectionListener(new SelectionAdapter() {
+		btnPlaceAnOrder.addSelectionListener(new SelectionAdapter()
+		{
 			@Override
-			public void widgetSelected(SelectionEvent e) {
+			public void widgetSelected(SelectionEvent e)
+			{
 			}
 		});
 		btnPlaceAnOrder.setText("Place an order");
 		btnPlaceAnOrder.setBounds(277, 138, 150, 100);
-		
+
 		Button btnAdministratorMenu = new Button(shell, SWT.NONE);
-		btnAdministratorMenu.addSelectionListener(new SelectionAdapter() {
+		btnAdministratorMenu.addSelectionListener(new SelectionAdapter()
+		{
 			@Override
-			public void widgetSelected(SelectionEvent e) {
+			public void widgetSelected(SelectionEvent e)
+			{
 				AdministratorView administrator = new AdministratorView();
 				administrator.open();
 			}
 		});
 		btnAdministratorMenu.setText("Administrator Menu");
-		btnAdministratorMenu.setBounds(277, 269, 150, 100);
-		
+		btnAdministratorMenu.setBounds(469, 271, 150, 100);
+
 		Button btnViewCatalogue = new Button(shell, SWT.NONE);
-		btnViewCatalogue.addSelectionListener(new SelectionAdapter() {
+		btnViewCatalogue.addSelectionListener(new SelectionAdapter()
+		{
 			@Override
-			public void widgetSelected(SelectionEvent e) {
+			public void widgetSelected(SelectionEvent e)
+			{
 				ViewCatalogue catalogue = new ViewCatalogue();
 				catalogue.open();
 			}
 		});
 		btnViewCatalogue.setText("View Catalogue");
 		btnViewCatalogue.setBounds(73, 138, 150, 100);
-		
+
 		Button btnSearchDepartment = new Button(shell, SWT.NONE);
 		btnSearchDepartment.setText("View Departments");
 		btnSearchDepartment.setBounds(469, 138, 150, 100);
+
+		Button btnSearchItems = new Button(shell, SWT.NONE);
+		btnSearchItems.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				SearchItem search = new SearchItem();
+				search.open();
+			}
+		});
+		btnSearchItems.setText("Search Items");
+		btnSearchItems.setBounds(73, 271, 150, 100);
 
 	}
 }

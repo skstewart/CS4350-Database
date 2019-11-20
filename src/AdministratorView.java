@@ -16,6 +16,7 @@ public class AdministratorView
 
 	/**
 	 * Launch the application.
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args)
@@ -57,31 +58,48 @@ public class AdministratorView
 		shell.setMinimumSize(new Point(700, 500));
 		shell.setSize(422, 261);
 		shell.setText("Administrator View");
-		
+
 		txtTargutAdministratorView = new Text(shell, SWT.BORDER | SWT.CENTER);
 		txtTargutAdministratorView.setFont(SWTResourceManager.getFont("Segoe UI", 32, SWT.NORMAL));
 		txtTargutAdministratorView.setEnabled(false);
 		txtTargutAdministratorView.setEditable(false);
 		txtTargutAdministratorView.setText("Targut Administrator View");
 		txtTargutAdministratorView.setBounds(48, 32, 576, 85);
-		
+
 		Button btnAddItem = new Button(shell, SWT.NONE);
-		btnAddItem.addSelectionListener(new SelectionAdapter() {
+		btnAddItem.addSelectionListener(new SelectionAdapter()
+		{
 			@Override
-			public void widgetSelected(SelectionEvent e) {
+			public void widgetSelected(SelectionEvent e)
+			{
+				AddItem addItem = new AddItem();
+				addItem.open();
 			}
 		});
 		btnAddItem.setText("Add Item");
 		btnAddItem.setBounds(48, 176, 150, 100);
-		
+
 		Button btnRemoveItem = new Button(shell, SWT.NONE);
+		btnRemoveItem.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				RemoveItem removeItem = new RemoveItem();
+				removeItem.open();
+			}
+		});
 		btnRemoveItem.setText("Remove Item");
 		btnRemoveItem.setBounds(260, 176, 150, 100);
-		
+
 		Button btnViewCustomers = new Button(shell, SWT.NONE);
-		btnViewCustomers.addSelectionListener(new SelectionAdapter() {
+		btnViewCustomers.addSelectionListener(new SelectionAdapter()
+		{
 			@Override
-			public void widgetSelected(SelectionEvent e) {
+			public void widgetSelected(SelectionEvent e)
+			{
+				ViewCustomers customers = new ViewCustomers();
+				customers.open();
 			}
 		});
 		btnViewCustomers.setText("View Customers");
