@@ -1,15 +1,23 @@
 
-import java.io.*;
+import com.healthmarketscience.jackcess.Database;
+import com.healthmarketscience.jackcess.DatabaseBuilder;
+import com.healthmarketscience.jackcess.Table;
+import java.io.File;
+import java.io.IOException;
+import net.ucanaccess.jdbc.JackcessOpenerInterface;
+
 import java.sql.*;
+import java.util.HashMap;
 
 public class insertion_and_modification_methods {
 
+    // JDBC driver name and database URL
     static final String JDBC_DRIVER = "net.ucanaccess.jdbc.UcanaccessDriver";
-    
-    //IMPORTANT! This is assuming that the file is in the src directory with the rest of the .java files. update if necessary!!!
-    static final String TARGUT = "Targut.accdb";
-
-    insertion_and_modification_methods() {
+    static final String targut = "Targut.accdb";
+    static final String URL = "jdbc:ucanaccess://" + targut;
+    static final String DB_URL = "jdbc:ucanaccess://C:/Users/shayn/OneDrive/Documents/NetBeansProjects/DatabasesProject/src/Targut.accdb;memory=true"; 
+ 
+ insertion_and_modification_methods() {
 
     }
 
@@ -23,7 +31,7 @@ public class insertion_and_modification_methods {
 
         try {
 
-            connection = DriverManager.getConnection(TARGUT);
+            connection = DriverManager.getConnection(DB_URL);
 
             statement = connection.createStatement();
 
@@ -43,6 +51,40 @@ public class insertion_and_modification_methods {
                         + resultSet.getString(5) + "\t"
                         + resultSet.getString(6) + "\t"
                         + resultSet.getString(7));
+
+            }
+
+            resultSet = statement.executeQuery("SELECT * FROM CUSTOMER");
+
+            // ----------------------- FORMAT THIS TO FIT THE UI: ---------------------------------------------------------
+            System.out.println("ID\tCustomer ID\t Name\t Email\t Payment Method \tShipment Info\tConfirmation\tPhone\t");
+            System.out.println("===\t========\t==================\t============\t=========\t=======\t=========\t===========");
+
+            // this prints to console, configure it to print to the UI
+            while (resultSet.next()) {
+                System.out.println(resultSet.getInt(1) + "\t"
+                        + resultSet.getString(2) + "\t"
+                        + resultSet.getString(3) + "\t"
+                        + resultSet.getString(4) + "\t"
+                        + resultSet.getString(5) + "\t"
+                        + resultSet.getString(6) + "\t"
+                        + resultSet.getString(7) + "\t"
+                        + resultSet.getString(8));
+
+            }
+
+            resultSet = statement.executeQuery("SELECT * FROM DEPARTMENT");
+
+            // ----------------------- FORMAT THIS TO FIT THE UI: ---------------------------------------------------------
+            System.out.println("ID\t Department ID\t Department Name\t");
+            System.out.println("===\t=========\t==================\t====");
+
+            // this prints to console, configure it to print to the UI
+            while (resultSet.next()) {
+                System.out.println(resultSet.getInt(1) + "\t"
+                        + resultSet.getString(2) + "\t"
+                        + resultSet.getString(3));
+
             }
         } catch (SQLException sqlex) {
             sqlex.printStackTrace();
