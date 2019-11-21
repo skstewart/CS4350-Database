@@ -11,11 +11,12 @@ import java.util.HashMap;
 
 public class TargutDatabase {
 
-    // JDBC driver name and database URL
     static final String JDBC_DRIVER = "net.ucanaccess.jdbc.UcanaccessDriver";
     static final String targut = "Targut.accdb";
     static final String URL = "jdbc:ucanaccess://" + targut;
-    static final String DB_URL = "jdbc:ucanaccess://C:/Users/shayn/OneDrive/Documents/NetBeansProjects/DatabasesProject/src/Targut.accdb;memory=true"; 
+    
+    // edit below url to the location of the db. this assumes it is in the same src folder
+    static final String DB_URL = "jdbc:ucanaccess://src/Targut.accdb;memory=true"; 
  
  TargutDatabase() {
 
