@@ -9,7 +9,7 @@ import net.ucanaccess.jdbc.JackcessOpenerInterface;
 import java.sql.*;
 import java.util.HashMap;
 
-public class insertion_and_modification_methods {
+public class TargutDatabase {
 
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "net.ucanaccess.jdbc.UcanaccessDriver";
@@ -17,12 +17,12 @@ public class insertion_and_modification_methods {
     static final String URL = "jdbc:ucanaccess://" + targut;
     static final String DB_URL = "jdbc:ucanaccess://C:/Users/shayn/OneDrive/Documents/NetBeansProjects/DatabasesProject/src/Targut.accdb;memory=true"; 
  
- insertion_and_modification_methods() {
+ TargutDatabase() {
 
     }
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException {
-        insertion_and_modification_methods db = new insertion_and_modification_methods();
+        TargutDatabase db = new TargutDatabase();
 
         Connection connection = null;
         Statement statement = null;
