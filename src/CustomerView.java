@@ -98,7 +98,14 @@ public class CustomerView
 			public void widgetSelected(SelectionEvent e)
 			{
 				ViewCatalogue catalogue = new ViewCatalogue();
-				catalogue.open();
+				try
+				{
+					catalogue.open();
+				} catch (Exception e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnViewCatalogue.setText("View Catalogue");
