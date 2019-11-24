@@ -2,6 +2,9 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Text;
+
+import java.sql.SQLException;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -99,11 +102,39 @@ public class AdministratorView
 			public void widgetSelected(SelectionEvent e)
 			{
 				ViewCustomers customers = new ViewCustomers();
-				customers.open();
+				try
+				{
+					customers.open();
+				} catch (ClassNotFoundException | SQLException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnViewCustomers.setText("View Customers");
 		btnViewCustomers.setBounds(474, 176, 150, 100);
+		
+		Button btnViewOrders = new Button(shell, SWT.NONE);
+		btnViewOrders.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+			}
+		});
+		btnViewOrders.setText("View Orders");
+		btnViewOrders.setBounds(260, 320, 150, 100);
+		
+		Button btnCustomerView = new Button(shell, SWT.NONE);
+		btnCustomerView.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				CustomerView customer = new CustomerView();
+				shell.dispose();
+				customer.open();
+			}
+		});
+		btnCustomerView.setText("Customer View");
+		btnCustomerView.setBounds(474, 320, 150, 100);
 
 	}
 

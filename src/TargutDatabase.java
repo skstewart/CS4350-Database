@@ -123,42 +123,109 @@ public class TargutDatabase
 
 	String[][] getCatalogue() throws SQLException
 	{
-		
-		resultSet = statement.executeQuery("SELECT * FROM ITEM");
+		String[][] catalogue = null;
+		try
+		{
+			resultSet = statement.executeQuery("SELECT * FROM ITEM");
 
-		// System.out.println("ID\tItem ID\t Item Name\tExp Date\tPrice\tStock\tOn
-		// Sale\t");
-		// System.out.println("===\t========\t==================\t============\t=========\t=======\t=======");
-		
-		int size = 0;
-		
-		
-		if (resultSet != null) 
+			int size = 0;
+
+			if (resultSet != null)
+			{
+				resultSet.last(); // moves cursor to the last row
+				size = resultSet.getRow(); // get row id
+			}
+			resultSet.beforeFirst();
+
+			catalogue = new String[size][6];
+			int row = 0;
+			while (resultSet.next())
+			{
+
+				catalogue[row][0] = resultSet.getString(5);
+				catalogue[row][1] = resultSet.getString(1);
+				catalogue[row][2] = resultSet.getString(2);
+				catalogue[row][3] = resultSet.getString(3);
+				catalogue[row][4] = "$" + String.valueOf((Math.floor(Double.parseDouble(resultSet.getString(4)) * 100) / 100)); // truncate to 2
+																																// decimal places
+				catalogue[row][5] = resultSet.getString(6);
+				row++;
+			}
+		} finally
 		{
-		  resultSet.last();    // moves cursor to the last row
-		  size = resultSet.getRow(); // get row id 
-		}
-		resultSet.beforeFirst();
-		
-		
-		
-		
-		String[][] catalogue = new String[size][7];
-		int row = 0;
-		while (resultSet.next())
-		{
-			
-			catalogue[row][0] = String.valueOf(resultSet.getInt(1)); 
-			catalogue[row][1] = resultSet.getString(2);
-			catalogue[row][2] = resultSet.getString(3);
-			catalogue[row][3] = resultSet.getString(4);
-			catalogue[row][4] = resultSet.getString(5);
-			catalogue[row][5] = resultSet.getString(6);
-			catalogue[row][6] = resultSet.getString(7);
-			row++;
+
+			try
+			{
+				if (null != connection)
+				{
+
+					resultSet.close();
+					statement.close();
+
+					connection.close();
+				}
+			} catch (SQLException sqlex)
+			{
+				sqlex.printStackTrace();
+			}
 		}
 
 		return catalogue;
+	}
+
+	String[][] getCustomers() throws SQLException
+	{
+		
+		String[][] customers = null;
+
+		try
+		{
+			resultSet = statement.executeQuery("SELECT * FROM CUSTOMER");
+	
+			int size = 0;
+	
+			if (resultSet != null)
+			{
+				resultSet.last(); // moves cursor to the last row
+				size = resultSet.getRow(); // get row id 'v
+			}
+			resultSet.beforeFirst();
+	
+			customers = new String[size][7];
+			int row = 0;
+			while (resultSet.next())
+			{
+	
+				customers[row][0] = resultSet.getString(7);
+				customers[row][1] = resultSet.getString(1);
+				customers[row][2] = resultSet.getString(2);
+				customers[row][3] = resultSet.getString(3);
+				customers[row][4] = resultSet.getString(4);
+				customers[row][5] = resultSet.getString(5);
+				customers[row][6] = resultSet.getString(6);
+				row++;
+			}
+		}finally
+		{
+
+			try
+			{
+				if (null != connection)
+				{
+
+					resultSet.close();
+					statement.close();
+
+					connection.close();
+				}
+			} catch (SQLException sqlex)
+			{
+				sqlex.printStackTrace();
+			}
+		}
+		
+
+		return customers;
 	}
 
 	// -------------------------------------INSERTION

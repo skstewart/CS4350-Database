@@ -65,41 +65,38 @@ public class ViewCatalogue
 	protected void createContents() throws SQLException
 	{
 		shell = new Shell();
-		shell.setMinimumSize(new Point(1000, 1000));
-		shell.setSize(872, 1000);
+		shell.setMinimumSize(new Point(950, 1000));
+		shell.setSize(810, 1000);
 		shell.setText("Catalogue");
 		
 		
 		table = new Table(shell, SWT.BORDER | SWT.FULL_SELECTION);
-		table.setBounds(10, 10, 964, 941);
+		table.setBounds(10, 10, 901, 941);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		
 		//Creates the columns
 		TableColumn idColumn = new TableColumn(table, SWT.CENTER);
 	    TableColumn itemIdColumn = new TableColumn(table, SWT.CENTER);
+	    TableColumn departmentColumn= new TableColumn(table, SWT.CENTER);
 	    TableColumn itemNameColumn = new TableColumn(table, SWT.CENTER);
-	    TableColumn expDateColumn = new TableColumn(table, SWT.CENTER);
 	    TableColumn priceColumn = new TableColumn(table, SWT.CENTER);
-	    TableColumn stockColumn = new TableColumn(table, SWT.CENTER);
 	    TableColumn onSaleColumn = new TableColumn(table, SWT.CENTER);
 	    
 	    //Names the columns in the header
-	    idColumn.setText("ID");
+	    idColumn.setText("ID ");
 	    itemIdColumn.setText("Item ID");
+	    departmentColumn.setText("Department");
 	    itemNameColumn.setText("Item Name");
-	    expDateColumn.setText("Expiration Date");
 	    priceColumn.setText("Price");
-	    stockColumn.setText("Stock");
 	    onSaleColumn.setText("On Sale");
 	    
 	    //Sets the width of all the columns
-	    idColumn.setWidth(135);
+	    idColumn.setWidth(40);
 	    itemIdColumn.setWidth(135);
-	    itemNameColumn.setWidth(135);
-	    expDateColumn.setWidth(135);
+	    departmentColumn.setWidth(135);
+	    itemNameColumn.setWidth(300);
 	    priceColumn.setWidth(135);
-	    stockColumn.setWidth(135);
 	    onSaleColumn.setWidth(135);
 	    
 	    table.setHeaderVisible(true);

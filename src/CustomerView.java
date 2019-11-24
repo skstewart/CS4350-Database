@@ -85,7 +85,9 @@ public class CustomerView
 			public void widgetSelected(SelectionEvent e)
 			{
 				AdministratorView administrator = new AdministratorView();
+				shell.dispose();
 				administrator.open();
+				
 			}
 		});
 		btnAdministratorMenu.setText("Administrator Menu");
@@ -111,10 +113,6 @@ public class CustomerView
 		btnViewCatalogue.setText("View Catalogue");
 		btnViewCatalogue.setBounds(73, 138, 150, 100);
 
-		Button btnSearchDepartment = new Button(shell, SWT.NONE);
-		btnSearchDepartment.setText("View Departments");
-		btnSearchDepartment.setBounds(469, 138, 150, 100);
-
 		Button btnSearchItems = new Button(shell, SWT.NONE);
 		btnSearchItems.addSelectionListener(new SelectionAdapter()
 		{
@@ -126,7 +124,7 @@ public class CustomerView
 			}
 		});
 		btnSearchItems.setText("Search Items");
-		btnSearchItems.setBounds(73, 271, 150, 100);
+		btnSearchItems.setBounds(469, 138, 150, 100);
 
 	}
 }
