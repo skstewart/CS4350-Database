@@ -248,9 +248,25 @@ public class TargutDatabase
 		Statement s = conn.createStatement();
 
 		s.executeUpdate(stmt);
+		
+		try
+		{
+			if (null != connection)
+			{
+
+				resultSet.close();
+				statement.close();
+
+				connection.close();
+			}
+		} catch (SQLException sqlex)
+		{
+			sqlex.printStackTrace();
+		}
 
 	}
 
+	/** Not needed anymore
 	void insertDepartment(Connection conn) throws ClassNotFoundException, SQLException
 	{
 		int deptID = 0; // have the user able to enter this value
@@ -263,22 +279,30 @@ public class TargutDatabase
 		s.executeUpdate(stmt);
 
 	}
+	*/
 
-	void insertItem(Connection conn) throws ClassNotFoundException, SQLException
+	void insertItem(String itemId, String department, String itemName, double price, boolean onSale) throws ClassNotFoundException, SQLException
 	{
-		int itemID = 0; // have the user able to enter this value
-		String itemName = "'abc'"; // have the user able to enter this value
-		String expDate = "'1/1/2099'"; // have the user able to enter this value
-		double price = 0; // have the user able to enter this value
-		int stock = 0; // have the user able to enter this value
-		boolean onSale = false; // have the user able to enter this value
 
-		String stmt = "INSERT INTO Item([Item ID],[Item Name],[Exp Date],Price,Stock,[On Sale]) VALUES(" + itemID + "," + itemName + "," + expDate
-				+ "," + price + "," + stock + "," + onSale + ")";
+		//String stmt = "INSERT INTO Item " + "VALUES(" + 2000 + itemId + "," + department + "," + itemName + "," + price + "," + onSale + ")";
+		String stmt = "INSERT INTO Item ([Item ID], Department, [Item Name], Price, [On Sale]) " + "VALUES (\""+ itemId + "\",\"" + department + "\",\"" + itemName + "\",\"" + price + "\",\"" + onSale + "\")";
 
-		Statement s = conn.createStatement();
+		System.out.println(stmt);
+		Statement s = connection.createStatement();
 
 		s.executeUpdate(stmt);
+		
+		try
+		{
+			if (null != connection)
+			{
+				statement.close();
+				connection.close();
+			}
+		} catch (SQLException sqlex)
+		{
+			sqlex.printStackTrace();
+		}
 
 	}
 
