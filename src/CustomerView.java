@@ -102,7 +102,7 @@ public class CustomerView
 				ViewCatalogue catalogue = new ViewCatalogue();
 				try
 				{
-					catalogue.open();
+					catalogue.open(false);
 				} catch (Exception e1)
 				{
 					// TODO Auto-generated catch block

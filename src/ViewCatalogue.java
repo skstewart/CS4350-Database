@@ -1,4 +1,5 @@
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.custom.ScrolledComposite;
 
@@ -8,9 +9,12 @@ import java.util.ArrayList;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
 
 public class ViewCatalogue
 {
@@ -18,6 +22,7 @@ public class ViewCatalogue
 	protected Shell shell;
 	protected TargutDatabase db;
 	private Table table;
+	private Boolean remove;
 
 	/**
 	 * Launch the application.
@@ -28,7 +33,7 @@ public class ViewCatalogue
 		try
 		{
 			ViewCatalogue window = new ViewCatalogue();
-			window.open();
+			window.open(false);
 		} catch (Exception e)
 		{
 			e.printStackTrace();
@@ -40,8 +45,9 @@ public class ViewCatalogue
 	 * @throws ClassNotFoundException 
 	 * @throws SQLException 
 	 */
-	public void open() throws ClassNotFoundException, SQLException
+	public void open(boolean remove) throws ClassNotFoundException, SQLException
 	{
+		this.remove = remove;
 		db = new TargutDatabase();
 		Display display = Display.getDefault();
 		createContents();
@@ -71,6 +77,9 @@ public class ViewCatalogue
 		
 		
 		table = new Table(shell, SWT.BORDER | SWT.FULL_SELECTION);
+		
+		
+		
 		table.setBounds(10, 10, 901, 941);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
@@ -106,11 +115,47 @@ public class ViewCatalogue
 	    
 	    for (int i = 0; i < rows; i++)
 	    {
-	    	TableItem item = new TableItem(table, SWT.NONE);
+	    	TableItem item = new TableItem(table, 0);
 	    	item.setText(catalogue[i]);
 	    }
-
 	    
+	    //Listener for if in remove mode
+  		table.addMouseListener(new MouseAdapter() {
+  			@Override
+  			public void mouseDoubleClick(MouseEvent e) {
+  				if (remove)
+  				{
+  					try
+					{
+						db = new TargutDatabase();
+					} catch (ClassNotFoundException e2)
+					{
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					} catch (SQLException e2)
+					{
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+  					
+  			        TableItem[] selection = table.getSelection();
+  			        
+  			        try
+					{
+						db.removeItem(selection);
+					} catch (SQLException e1)
+					{
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+  			        
+  			        RemoveCompleted complete = new RemoveCompleted();
+  			        complete.open();
+  			        shell.dispose();
+  			        
+  				}
+  			}
+  		});
 
 	}
 }

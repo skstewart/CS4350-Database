@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.eclipse.swt.widgets.TableItem;
+
 public class TargutDatabase
 {
 
@@ -287,7 +289,7 @@ public class TargutDatabase
 		//String stmt = "INSERT INTO Item " + "VALUES(" + 2000 + itemId + "," + department + "," + itemName + "," + price + "," + onSale + ")";
 		String stmt = "INSERT INTO Item ([Item ID], Department, [Item Name], Price, [On Sale]) " + "VALUES (\""+ itemId + "\",\"" + department + "\",\"" + itemName + "\",\"" + price + "\",\"" + onSale + "\")";
 
-		System.out.println(stmt);
+		//System.out.println(stmt);
 		Statement s = connection.createStatement();
 
 		s.executeUpdate(stmt);
@@ -323,10 +325,29 @@ public class TargutDatabase
 		s.executeUpdate(stmt);
 
 	}
-
-	void displayAllCustomers()
+	
+	void removeItem(TableItem[] selection) throws SQLException 
 	{
-
+		
+		String stmt = "DELETE FROM item WHERE ID=\"" + selection[0].getText(0) + "\"";
+		//System.out.println(stmt);
+		
+		Statement s = connection.createStatement();
+		
+		s.executeUpdate(stmt);
+		
+		try
+		{
+			if (null != connection)
+			{
+				statement.close();
+				connection.close();
+			}
+		} catch (SQLException sqlex)
+		{
+			sqlex.printStackTrace();
+		}
 	}
+
 
 }

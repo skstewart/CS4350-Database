@@ -88,6 +88,9 @@ public class AddItem
 		Combo departmentText = new Combo(shell, SWT.NONE);
 		departmentText.setFont(SWTResourceManager.getFont("Segoe UI", 16, SWT.NORMAL));
 		departmentText.setBounds(10, 190, 564, 38);
+		departmentText.add("Office Supplies");
+		departmentText.add("Furniture");
+		departmentText.add("Technology");
 		
 		Label lblItemName = new Label(shell, SWT.NONE);
 		lblItemName.setText("Item Name");
